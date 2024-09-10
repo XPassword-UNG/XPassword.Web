@@ -1,0 +1,129 @@
+.landing-page {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.header {
+    background-color: #333;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin: 0 1rem;
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.cta .btn {
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+}
+
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+}
+
+.hero {
+    //background-image: url('assets/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.features {
+    padding: 2rem;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-around;
+}
+
+.feature-item {
+    text-align: center;
+    width: 30%;
+}
+
+.cta-section {
+    padding: 2rem;
+    background-color: #007bff;
+    color: white;
+}
+
+.cta-section h2 {
+    margin-bottom: 1rem;
+}
+
+footer {
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        /* Hide menu on mobile and use a hamburger icon instead */
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
