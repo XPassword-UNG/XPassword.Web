@@ -11,6 +11,10 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,8 +31,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      preventDuplicates: true,
+      tapToDismiss: true,
+      progressBar: true,
+      progressAnimation: 'decreasing',
+      positionClass: 'toast-top-right',
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

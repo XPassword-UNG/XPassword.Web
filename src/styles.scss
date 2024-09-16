@@ -1,11 +1,16 @@
+@import 'ngx-toastr/toastr';
+
+html,
 body {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    color: #E0E0CE;
-    min-height: 100vh;
-    flex-direction: column;
-    font-family: 'Arial', sans-serif;
+  height: 100%;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  color: #E0E0CE;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
