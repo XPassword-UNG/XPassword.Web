@@ -1,58 +1,17 @@
-<div class="landing-page">
-    <!-- Header Section -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo">
-                <img src="assets/logo.png" alt="XPassword">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="cta">
-                <a routerLink="/signup" class="btn primary-btn">Sign Up</a>
-                <a routerLink="/login" class="btn secondary-btn">Login</a>
-            </div>
-        </nav>
-    </header>
+<div class="landing-container">
+    <app-header></app-header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Welcome to Our Product</h1>
-            <p>Your solution to managing [problem/feature] easily and efficiently.</p>
-            <a routerLink="/signup" class="btn primary-btn">Get Started</a>
+    <main>
+        <h2>Gerenciador de Senhas Seguro e Intuitivo</h2>
+        <p>
+            O XPassword é desenvolvido para ajudar você a armazenar, gerenciar e acessar suas senhas com segurança em
+            todos os seus dispositivos.
+        </p>
+        <div class="cta-buttons">
+            <button routerLink="/signup" class="signup-btn">Começar Agora</button>
+            <button routerLink="/features" class="learn-more-btn">Saiba Mais</button>
         </div>
-        <div class="hero-image">
-            <img src="assets/hero-image.png" alt="Hero Image">
-        </div>
-    </section>
+    </main>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="feature-item">
-            <h3>Feature 1</h3>
-            <p>Short description of the feature.</p>
-        </div>
-        <div class="feature-item">
-            <h3>Feature 2</h3>
-            <p>Short description of the feature.</p>
-        </div>
-        <div class="feature-item">
-            <h3>Feature 3</h3>
-            <p>Short description of the feature.</p>
-        </div>
-    </section>
-
-    <!-- Call-to-Action Section -->
-    <section class="cta-section">
-        <h2>Ready to Get Started?</h2>
-        <a routerLink="/signup" class="btn primary-btn">Sign Up Today</a>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
+    <app-footer></app-footer>
 </div>
