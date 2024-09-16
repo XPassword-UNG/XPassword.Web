@@ -1,129 +1,101 @@
-.landing-page {
-    font-family: 'Arial', sans-serif;
+.landing-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    min-height: 100vh;
+
+    main {
+        flex: 1;
+        padding: 2rem;
+        background-color: #ecf0f1;
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-top: 2rem;
+        }
+
+        ul {
+            list-style: disc;
+            margin-left: 2rem;
+            margin-bottom: 2rem;
+
+            li {
+                margin-bottom: 0.5rem;
+
+                strong {
+                    color: #2c3e50;
+                }
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+
+            .signup-btn,
+            .learn-more-btn {
+                margin: 0 0.5rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .signup-btn {
+                background-color: #3498db;
+                color: #fff;
+
+                &:hover {
+                    background-color: #2980b9;
+                }
+            }
+
+            .learn-more-btn {
+                background-color: #95a5a6;
+                color: #fff;
+
+                &:hover {
+                    background-color: #7f8c8d;
+                }
+            }
+        }
+    }
 }
 
-.header {
-    background-color: #333;
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar .nav-links {
-    list-style: none;
-    display: flex;
-}
-
-.navbar .nav-links li {
-    margin: 0 1rem;
-}
-
-.navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-}
-
-.cta .btn {
-    padding: 0.5rem 1rem;
-    margin-left: 0.5rem;
-}
-
-.primary-btn {
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-}
-
-.secondary-btn {
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-    border-radius: 5px;
-}
-
-.hero {
-    //background-image: url('assets/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.hero-image img {
-    max-width: 100%;
-    height: auto;
-}
-
-.features {
-    padding: 2rem;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: space-around;
-}
-
-.feature-item {
-    text-align: center;
-    width: 30%;
-}
-
-.cta-section {
-    padding: 2rem;
-    background-color: #007bff;
-    color: white;
-}
-
-.cta-section h2 {
-    margin-bottom: 1rem;
-}
-
-footer {
-    padding: 1rem;
-    background-color: #333;
-    color: white;
-    width: 100%;
-    text-align: center;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
+    main {
+        padding: 1rem;
 
-    .feature-item {
-        width: 80%;
-        margin-bottom: 1rem;
-    }
+        h2 {
+            font-size: 2rem;
+        }
 
-    .navbar .nav-links {
-        display: none;
-        /* Hide menu on mobile and use a hamburger icon instead */
-    }
+        p,
+        ul li {
+            font-size: 1rem;
+        }
 
-    .hero h1 {
-        font-size: 2rem;
-    }
+        .cta-buttons {
+            flex-direction: column;
 
-    .hero p {
-        font-size: 1rem;
+            .signup-btn,
+            .learn-more-btn {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+        }
     }
 }
