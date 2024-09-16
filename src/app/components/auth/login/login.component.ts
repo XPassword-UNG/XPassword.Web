@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Authentication } from '../../model/authentication.model';
 import { Authenticator } from '../authenticator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private auth: Authenticator,
     private toastr: ToastrService,
@@ -47,7 +49,7 @@ export class LoginComponent {
           }
 
           this.auth.setAuth(authentication);
-          this.toastr.success('Sucesso ao realizar login!!', 'Sucesso');
+          this.router.navigate(['dashboard']);
         },
         error: (err) => {
           if (err.error as any[]) {

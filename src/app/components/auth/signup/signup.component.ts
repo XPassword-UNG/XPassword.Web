@@ -5,6 +5,7 @@ import { AccountCreationRequest } from '../../model/account-creation-request.mod
 import { ToastrService } from 'ngx-toastr';
 import { Authenticator } from '../authenticator';
 import { Authentication } from '../../model/authentication.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ export class SignupComponent {
   signupForm: FormGroup;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private auth: Authenticator,
     private toastr: ToastrService,
@@ -51,7 +53,7 @@ export class SignupComponent {
           }
 
           this.auth.setAuth(authentication);
-          this.toastr.success('Sucesso ao cadastrar sua conta!!', 'Sucesso');
+          this.router.navigate(['dashboard']);
         },
         error: (err) => {
           if (err.error as any[]) {
