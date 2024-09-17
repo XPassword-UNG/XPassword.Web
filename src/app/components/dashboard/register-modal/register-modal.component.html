@@ -2,31 +2,36 @@
 <mat-dialog-content>
   <form [formGroup]="passwordForm">
     <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title" placeholder="e.g., Email Account" required />
-      <mat-error *ngIf="passwordForm.get('title')?.hasError('required')">
-        Title is required
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" placeholder="ex. Conta Google" required />
+      <mat-error *ngIf="passwordForm.get('name')?.hasError('required')">
+        Nome é obrigatório
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Username or Email</mat-label>
-      <input matInput formControlName="username" placeholder="e.g., user@example.com" required />
-      <mat-error *ngIf="passwordForm.get('username')?.hasError('required')">
-        Username or Email is required
+      <mat-label>Nome de usuário ou Email</mat-label>
+      <input matInput formControlName="email" placeholder="ex. user@exemplo.com" required />
+      <mat-error *ngIf="passwordForm.get('email')?.hasError('required')">
+        O Nome de usuário ou Email é obrigatório
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" required />
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required />
+      <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
       <mat-error *ngIf="passwordForm.get('password')?.hasError('required')">
-        Password is required
+        A Senha é obrigatória
       </mat-error>
     </mat-form-field>
+    <button mat-button (click)="generatePassword()">Generate Password</button>
 
     <mat-form-field appearance="fill">
-      <mat-label>Notes</mat-label>
+      <mat-label>Notas</mat-label>
       <textarea matInput formControlName="notes" rows="3"></textarea>
     </mat-form-field>
   </form>

@@ -1,31 +1,32 @@
 // dashboard.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { Register } from '../model/register.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterModalComponent } from './register-modal/register-modal.component';
+import { BasePageComponent } from '../shared/base-page/base-page.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends BasePageComponent implements OnInit {
   registers: Register[] = [];
 
   constructor(
-    private router: Router,
+    private injector: Injector,
     private dialog: MatDialog,
-    private toastr: ToastrService,
     private registerService: RegisterService
   ) {
-
+    super(injector);
   }
 
   ngOnInit(): void {
     this.loadPasswords();
+    setInterval(() => { this.checkToken(); }, 30000);
   }
 
   loadPasswords() {
@@ -34,21 +35,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           console.log(res);
         },
-        error: (err) => {
-          if (err.error as any[]) {
-            err.error.forEach((e: { message: string; }) => {
-              this.toastr.error(e.message, 'Error');
-            });
-            return;
-          }
-
-          if (err.status == 401) {
-            this.router.navigate(['login']);
-            return;
-          }
-
-          this.toastr.error('Unexpected error', 'Error');
-        }
+        error: (err) => { this.validateError(err); }
       })
   }
 
@@ -61,7 +48,7 @@ export class DashboardComponent implements OnInit {
       if (result) {
         // Refresh the data
         this.loadPasswords();
-        this.toastr.success('Password added successfully!');
+        this.showSuccess('Password added successfully!');
       }
     });
   }

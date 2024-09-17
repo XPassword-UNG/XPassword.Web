@@ -1,28 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { LoginRequest } from '../../model/login-request.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Authentication } from '../../model/authentication.model';
-import { Authenticator } from '../authenticator';
-import { Router } from '@angular/router';
+import { BasePageComponent } from '../../shared/base-page/base-page.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent extends BasePageComponent {
 
   loginForm: FormGroup;
 
   constructor(
-    private router: Router,
+    private injector: Injector,
     private fb: FormBuilder,
-    private auth: Authenticator,
-    private toastr: ToastrService,
     private accountService: AccountService
   ) {
+    super(injector);
+    
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -39,7 +37,7 @@ export class LoginComponent {
       .subscribe({
         next: (val) => {
           if (val.success == false) {
-            this.toastr.error(val.error, 'Error')
+            this.showWarn(val.error)
             return;
           }
 
@@ -49,19 +47,9 @@ export class LoginComponent {
           }
 
           this.auth.setAuth(authentication);
-          this.router.navigate(['dashboard']);
+          this.redirectTo('dashboard');
         },
-        error: (err) => {
-          if (err.error as any[]) {
-            err.error.forEach((e: { message: string; }) => {
-              this.toastr.error(e.message, 'Error');
-            });
-            return;
-          }
-
-          this.auth.clean();
-          this.toastr.error('Unexpected error', 'Error');
-        }
+        error: (err) => { this.validateError(err); }
       })
   }
 }

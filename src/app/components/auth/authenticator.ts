@@ -12,6 +12,10 @@ export class Authenticator {
     localStorage.setItem('lifeTime', lifeTime.toString());
   }
 
+  getLifeTime(): string | null {
+    return localStorage.getItem('lifeTime');
+  }
+
   getToken(): string | null {
     const lifeTime = localStorage.getItem('lifeTime');
 

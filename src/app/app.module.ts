@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RegisterModalComponent } from './components/dashboard/register-modal/register-modal.component';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { RegisterModalComponent } from './components/dashboard/register-modal/re
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       preventDuplicates: true,
