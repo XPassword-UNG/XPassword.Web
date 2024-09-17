@@ -1,6 +1,11 @@
 // dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { PasswordEntry, RegisterService } from '../services/register.service';
+import { RegisterService } from '../services/register.service';
+import { Register } from '../model/register.model';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterModalComponent } from './register-modal/register-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,42 +13,56 @@ import { PasswordEntry, RegisterService } from '../services/register.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  passwords: PasswordEntry[] = [];
-  totalPasswords: number = 0;
-  securePasswords: number = 0;
-  passwordScore: number = 0;
+  registers: Register[] = [];
 
-  constructor(private registerService: RegisterService) { }
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private toastr: ToastrService,
+    private registerService: RegisterService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.loadPasswords();
   }
 
   loadPasswords() {
-    this.registerService.getPasswords().subscribe((data) => {
-      this.passwords = data;
-      this.calculateStats();
-      this.renderCharts();
-    });
-  }
+    this.registerService.getRegisters()
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          if (err.error as any[]) {
+            err.error.forEach((e: { message: string; }) => {
+              this.toastr.error(e.message, 'Error');
+            });
+            return;
+          }
 
-  calculateStats() {
-    this.totalPasswords = this.passwords.length;
-    this.securePasswords = this.passwords.filter((p) => p.isSecure).length;
-    this.passwordScore = this.calculatePasswordScore();
-  }
+          if (err.status == 401) {
+            this.router.navigate(['login']);
+            return;
+          }
 
-  calculatePasswordScore(): number {
-    if (this.totalPasswords === 0) return 0;
-    const totalStrength = this.passwords.reduce((sum, p) => sum + p.strength, 0);
-    return Math.round(totalStrength / this.totalPasswords);
-  }
-
-  renderCharts() {
-    // Placeholder for chart rendering logic
+          this.toastr.error('Unexpected error', 'Error');
+        }
+      })
   }
 
   openAddPasswordModal() {
-    // Logic to open the modal (we'll implement this later)
+    const dialogRef = this.dialog.open(RegisterModalComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Refresh the data
+        this.loadPasswords();
+        this.toastr.success('Password added successfully!');
+      }
+    });
   }
 }

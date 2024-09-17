@@ -1,27 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
-export interface PasswordEntry {
-  id: number;
-  title: string;
-  strength: number; // 0 to 100
-  isSecure: boolean;
-}
+import { Observable } from 'rxjs';
+import { enviroment } from 'src/app/env/environment';
+import { AddRegisterRequest } from '../model/add-registers-request.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  private passwords: PasswordEntry[] = [
-    { id: 1, title: 'Email Account', strength: 80, isSecure: true },
-    { id: 2, title: 'Bank Account', strength: 60, isSecure: true },
-    { id: 3, title: 'Social Media', strength: 30, isSecure: false },
-    // ... add more entries as needed
-  ];
+  private apiUrl: string;
 
-  getPasswords(): Observable<PasswordEntry[]> {
-    return of(this.passwords);
+  constructor(private http: HttpClient) {
+    this.apiUrl = enviroment.registerApiUrl;
   }
 
-  // Methods to add, update, delete passwords can be added here
+  addRegisters(request: AddRegisterRequest): Observable<any> {
+    return this.http.put(this.apiUrl + '/AddRegisters', request);
+  }
+
+  getRegisters(): Observable<any> {
+    return this.http.get(this.apiUrl + '/GetRegisters');
+  }
 }
