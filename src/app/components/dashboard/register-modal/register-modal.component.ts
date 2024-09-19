@@ -21,7 +21,7 @@ export class RegisterModalComponent extends BasePageComponent {
   hidePassword = true;
 
   constructor(
-    private injector: Injector,
+    injector: Injector,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<RegisterModalComponent>,
     private registerService: RegisterService
@@ -56,8 +56,13 @@ export class RegisterModalComponent extends BasePageComponent {
     };
     this.registerService.addRegisters(request)
       .subscribe({
-        next: (res) => { console.log(res); this.showSuccess(res, 'Registro adicionado', 'dashboard'); this.dialogRef.close(); },
-        error: (err) => { console.log(err); this.validateError(err); this.dialogRef.close(); }
+        next: (res) => {
+          this.dialogRef.close(res);
+        },
+        error: (err) => {
+          this.validateError(err);
+          this.dialogRef.close(err);
+        }
       });
   }
 

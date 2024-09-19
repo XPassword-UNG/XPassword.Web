@@ -1,3 +1,5 @@
+@import './../../../../syles.theme.scss';
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -11,7 +13,7 @@
             max-width: 400px;
             margin: 2rem auto;
             padding: 2rem;
-            background-color: #ecf0f1;
+            background-color: $backcolor;
             border-radius: 8px;
 
             h2 {
@@ -30,14 +32,14 @@
                 input {
                     padding: 0.5rem;
                     margin-bottom: 0.5rem;
-                    border: 1px solid #bdc3c7;
+                    border: 1px solid $text1;
                     border-radius: 4px;
                 }
 
                 button {
                     padding: 0.75rem;
-                    background-color: #3498db;
-                    color: #fff;
+                    color: $text1;
+                    background-color: $text_highlight;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
@@ -54,7 +56,7 @@
                 margin-top: 1rem;
 
                 a {
-                    color: #3498db;
+                    color: $text_highlight;
                     text-decoration: none;
 
                     &:hover {

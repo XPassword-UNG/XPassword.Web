@@ -1,9 +1,6 @@
-// dashboard.component.ts
 import { Component, Injector, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { Register } from '../model/register.model';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterModalComponent } from './register-modal/register-modal.component';
 import { BasePageComponent } from '../shared/base-page/base-page.component';
@@ -17,7 +14,7 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
   registers: Register[] = [];
 
   constructor(
-    private injector: Injector,
+    injector: Injector,
     private dialog: MatDialog,
     private registerService: RegisterService
   ) {
@@ -33,7 +30,12 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
     this.registerService.getRegisters()
       .subscribe({
         next: (res) => {
-          console.log(res);
+          if (!(res.success as boolean)) {
+            this.showError(res.error);
+            return;
+          }
+
+          this.registers = res.registers as Register[];
         },
         error: (err) => { this.validateError(err); }
       })
@@ -46,9 +48,13 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Refresh the data
+        if (!(result.success as boolean)) {
+          this.showError(result.error);
+          return;
+        }
+        
         this.loadPasswords();
-        this.showSuccess('Password added successfully!');
+        this.showSuccess('Registro adicionado!');
       }
     });
   }

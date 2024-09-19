@@ -60,13 +60,21 @@ export class BasePageComponent {
   }
 
   validateError(err: any): void {
-    if (typeof (err.error) == typeof ('T'))
+    if (typeof (err.error) == typeof ('T')) {
       this.showError(err.error);
+      return;
+    }
 
-    if (err.error as any[]) {
+    if (err.error && err.status != 0) {
       err.error.forEach((e: { message: string; }) => {
         this.showError(e.message);
       });
+      return;
+    }
+
+    if (err.status == 0) {
+      this.showError('Estamos com problema ao tentar se conectar com o servidor, por favor, tente novamente em alguns instantes', 
+        'Erro de conexão');
       return;
     }
 
