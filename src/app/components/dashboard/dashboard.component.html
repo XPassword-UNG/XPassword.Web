@@ -7,7 +7,7 @@
         <div class="stats-cards">
             <div class="card">
                 <h3>Total Passwords</h3>
-                <p>1</p>
+                <p>{{ registers.length }}</p>
             </div>
             <div class="card">
                 <h3>Secure Passwords</h3>
@@ -26,8 +26,8 @@
         </div>
 
         <div class="actions">
-            <button (click)="openAddPasswordModal()">Add New Register</button>
-            <button routerLink="/passwords">View All Register</button>
+            <button (click)="openAddPasswordModal()">Novo Register</button>
+            <button routerLink="/registers">Meus Registros</button>
         </div>
     </main>
 

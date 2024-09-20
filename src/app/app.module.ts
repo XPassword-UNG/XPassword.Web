@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterModalComponent } from './components/dashboard/register-modal/register-modal.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RegisterModalComponent } from './components/dashboard/register-modal/re
     HeaderComponent,
     DashboardComponent,
     RegisterModalComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

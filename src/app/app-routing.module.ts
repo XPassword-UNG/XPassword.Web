@@ -6,13 +6,16 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './components/auth/auth.guard';
+import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
   { path: '**', component: NotFoundComponent },
 ];
 
