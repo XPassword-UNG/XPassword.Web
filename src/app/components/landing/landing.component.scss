@@ -1,3 +1,5 @@
+@import '../../../syles.theme.scss';
+
 .landing-container {
     display: flex;
     flex-direction: column;
@@ -6,7 +8,7 @@
     main {
         flex: 1;
         padding: 2rem;
-        background-color: #ecf0f1;
+        background-color: $backcolor;
 
         h2 {
             text-align: center;
@@ -54,20 +56,20 @@
             }
 
             .signup-btn {
-                background-color: #3498db;
-                color: #fff;
+                background-color: $text_highlight;
+                color: $text1;
 
                 &:hover {
-                    background-color: #2980b9;
+                    background-color: $text_highlight2;
                 }
             }
 
             .learn-more-btn {
-                background-color: #95a5a6;
-                color: #fff;
+                background-color: $button_color_secondary;
+                color: $text1;
 
                 &:hover {
-                    background-color: #7f8c8d;
+                    background-color: $button_color_secondary;
                 }
             }
         }

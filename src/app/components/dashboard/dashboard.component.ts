@@ -1,49 +1,61 @@
-// dashboard.component.ts
-import { Component, OnInit } from '@angular/core';
-import { PasswordEntry, RegisterService } from '../services/register.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { RegisterService } from '../services/register.service';
+import { Register } from '../model/register.model';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterModalComponent } from './register-modal/register-modal.component';
+import { BasePageComponent } from '../shared/base-page/base-page.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
-  passwords: PasswordEntry[] = [];
-  totalPasswords: number = 0;
-  securePasswords: number = 0;
-  passwordScore: number = 0;
+export class DashboardComponent extends BasePageComponent implements OnInit {
+  registers: Register[] = [];
 
-  constructor(private registerService: RegisterService) { }
+  constructor(
+    injector: Injector,
+    private dialog: MatDialog,
+    private registerService: RegisterService
+  ) {
+    super(injector);
+  }
 
   ngOnInit(): void {
     this.loadPasswords();
+    setInterval(() => { this.checkToken(); }, 30000);
   }
 
   loadPasswords() {
-    this.registerService.getPasswords().subscribe((data) => {
-      this.passwords = data;
-      this.calculateStats();
-      this.renderCharts();
-    });
-  }
+    this.registerService.getRegisters()
+      .subscribe({
+        next: (res) => {
+          if (!(res.success as boolean)) {
+            this.showError(res.error);
+            return;
+          }
 
-  calculateStats() {
-    this.totalPasswords = this.passwords.length;
-    this.securePasswords = this.passwords.filter((p) => p.isSecure).length;
-    this.passwordScore = this.calculatePasswordScore();
-  }
-
-  calculatePasswordScore(): number {
-    if (this.totalPasswords === 0) return 0;
-    const totalStrength = this.passwords.reduce((sum, p) => sum + p.strength, 0);
-    return Math.round(totalStrength / this.totalPasswords);
-  }
-
-  renderCharts() {
-    // Placeholder for chart rendering logic
+          this.registers = res.registers as Register[];
+        },
+        error: (err) => { this.validateError(err); }
+      })
   }
 
   openAddPasswordModal() {
-    // Logic to open the modal (we'll implement this later)
+    const dialogRef = this.dialog.open(RegisterModalComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if (!(result.success as boolean)) {
+          this.showError(result.error);
+          return;
+        }
+        
+        this.loadPasswords();
+        this.showSuccess('Registro adicionado!');
+      }
+    });
   }
 }

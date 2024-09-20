@@ -20,7 +20,7 @@
   
         .card {
           flex: 1 1 30%;
-          background-color: #ecf0f1;
+          background-color: #474747;
           margin: 1rem;
           padding: 1rem;
           text-align: center;
@@ -49,13 +49,13 @@
         }
   
         button:first-child {
-          background-color: #3498db;
+          background-color: #000000;
           color: #fff;
         }
   
         button:last-child {
-          background-color: #95a5a6;
-          color: #fff;
+          background-color: #474747;
+          color: #E0E0E0;
         }
       }
     }

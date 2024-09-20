@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { AccountCreationRequest } from '../../model/account-creation-request.model';
-import { ToastrService } from 'ngx-toastr';
-import { Authenticator } from '../authenticator';
 import { Authentication } from '../../model/authentication.model';
+import { BasePageComponent } from '../../shared/base-page/base-page.component';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent {
+export class SignupComponent extends BasePageComponent {
 
   signupForm: FormGroup;
 
   constructor(
+    private injector: Injector,
     private fb: FormBuilder,
-    private auth: Authenticator,
-    private toastr: ToastrService,
     private accountService: AccountService
   ) {
+    super(injector);
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -41,7 +40,7 @@ export class SignupComponent {
       .subscribe({
         next: (val) => {
           if (val.success == false) {
-            this.toastr.error(val.error, 'Error')
+            this.showWarn(val.error)
             return;
           }
 
@@ -51,19 +50,9 @@ export class SignupComponent {
           }
 
           this.auth.setAuth(authentication);
-          this.toastr.success('Sucesso ao cadastrar sua conta!!', 'Sucesso');
+          this.redirectTo('dashboard');
         },
-        error: (err) => {
-          if (err.error as any[]) {
-            err.error.forEach((e: { message: string; }) => {
-              this.toastr.error(e.message, 'Error');
-            });
-            return;
-          }
-
-          this.auth.clean();
-          this.toastr.error('Unexpected error', 'Error');
-        }
+        error: (err) => { this.validateError(err); }
       })
   }
 }

@@ -2,8 +2,11 @@
     <h1>
         <a routerLink="/">XPassword</a>
     </h1>
-    <nav>
+    <nav *ngIf="!this.auth.isLogged()">
         <button routerLink="/login">Login</button>
         <button routerLink="/signup">SignUp</button>
+    </nav>
+    <nav *ngIf="this.auth.isLogged()">
+      <button routerLink="/login">Sair</button>
     </nav>
 </header>

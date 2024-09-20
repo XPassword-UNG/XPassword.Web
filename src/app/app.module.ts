@@ -15,6 +15,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RegisterModalComponent } from './components/dashboard/register-modal/register-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     SignupComponent,
     HeaderComponent,
     DashboardComponent,
+    RegisterModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +40,11 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       preventDuplicates: true,

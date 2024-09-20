@@ -6,10 +6,18 @@ import { Authentication } from '../model/authentication.model';
 })
 export class Authenticator {
 
+  isLogged(): boolean {
+    return this.getToken() != null;
+  }
+
   setAuth(auth: Authentication): void {
     const lifeTime: number = Date.now() + auth.lifeTime * 1000;
     localStorage.setItem('accessToken', auth.token);
     localStorage.setItem('lifeTime', lifeTime.toString());
+  }
+
+  getLifeTime(): string | null {
+    return localStorage.getItem('lifeTime');
   }
 
   getToken(): string | null {
