@@ -15,7 +15,6 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
 
   constructor(
     injector: Injector,
-    private dialog: MatDialog,
     private registerService: RegisterService
   ) {
     super(injector);
@@ -39,23 +38,5 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
         },
         error: (err) => { this.validateError(err); }
       })
-  }
-
-  openAddPasswordModal() {
-    const dialogRef = this.dialog.open(RegisterModalComponent, {
-      width: '400px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        if (!(result.success as boolean)) {
-          this.showError(result.error);
-          return;
-        }
-        
-        this.loadPasswords();
-        this.showSuccess('Registro adicionado!');
-      }
-    });
   }
 }

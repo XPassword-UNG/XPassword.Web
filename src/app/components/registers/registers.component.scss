@@ -1,0 +1,50 @@
+.passwords-container {
+  padding: 2rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .search-filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    mat-form-field {
+      margin-right: 1rem;
+      width: 100%;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th.mat-header-cell {
+    text-align: left;
+  }
+
+  td.mat-cell {
+    text-align: left;
+  }
+
+  .mat-column-actions {
+    width: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-filter {
+    flex-direction: column;
+
+    mat-form-field {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+}
