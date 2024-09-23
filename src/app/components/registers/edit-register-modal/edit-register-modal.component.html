@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Novo Registro</h2>
+<h2 mat-dialog-title>Atualizar Registro</h2>
 <mat-dialog-content>
-  <form [formGroup]="passwordForm">
+  <form [formGroup]="editRegisterForm">
     <mat-form-field appearance="fill">
       <mat-label>Nome</mat-label>
       <input matInput formControlName="name" placeholder="ex. Conta Google" required />
-      <mat-error *ngIf="passwordForm.get('name')?.hasError('required')">
+      <mat-error *ngIf="editRegisterForm.get('name')?.hasError('required')">
         Nome é obrigatório
       </mat-error>
     </mat-form-field>
@@ -12,7 +12,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Nome de usuário ou Email</mat-label>
       <input matInput formControlName="email" placeholder="ex. user@exemplo.com" required />
-      <mat-error *ngIf="passwordForm.get('email')?.hasError('required')">
+      <mat-error *ngIf="editRegisterForm.get('email')?.hasError('required')">
         O Nome de usuário ou Email é obrigatório
       </mat-error>
     </mat-form-field>
@@ -24,7 +24,7 @@
         [attr.aria-pressed]="hidePassword">
         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="passwordForm.get('password')?.hasError('required')">
+      <mat-error *ngIf="editRegisterForm.get('password')?.hasError('required')">
         A Senha é obrigatória
       </mat-error>
     </mat-form-field>
@@ -37,6 +37,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!passwordForm.valid">Add</button>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!editRegisterForm.valid">Salvar</button>
 </mat-dialog-actions>

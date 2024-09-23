@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Exclusão de Registro</h2>
+<mat-dialog-content>
+  <p>Tem certeza que deseja deletar "<strong>{{ register.name }}</strong>"?</p>
+  <p>Essa ação é irreversível</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button color="warn" (click)="confirmDelete()">Sim, deletar</button>
+</mat-dialog-actions>

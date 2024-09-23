@@ -1,0 +1,19 @@
+mat-dialog-content {
+  form {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  :host ::ng-deep .mat-dialog-container {
+    padding: 1rem;
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { AccountCreationRequest } from '../../model/account-creation-request.model';
@@ -10,12 +10,12 @@ import { BasePageComponent } from '../../shared/base-page/base-page.component';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent extends BasePageComponent {
+export class SignupComponent extends BasePageComponent implements OnInit {
 
   signupForm: FormGroup;
 
   constructor(
-    private injector: Injector,
+    injector: Injector,
     private fb: FormBuilder,
     private accountService: AccountService
   ) {
@@ -26,6 +26,11 @@ export class SignupComponent extends BasePageComponent {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
+  }
+  
+  ngOnInit(): void {
+    if (this.auth.isLogged())
+      this.redirectTo('dashboard');
   }
 
   createAccount() {

@@ -13,14 +13,20 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule} from '@angular/material/select';
 import { RegisterModalComponent } from './components/dashboard/register-modal/register-modal.component';
+import { AccountComponent } from './components/account/account.component';
+import { RegistersComponent } from './components/registers/registers.component';
+import { DeleteConfirmationModalComponent } from './components/registers/delete-confirmation-modal/delete-confirmation-modal.component';
+import { EditRegisterModalComponent } from './components/registers/edit-register-modal/edit-register-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,10 @@ import { RegisterModalComponent } from './components/dashboard/register-modal/re
     HeaderComponent,
     DashboardComponent,
     RegisterModalComponent,
+    AccountComponent,
+    RegistersComponent,
+    DeleteConfirmationModalComponent,
+    EditRegisterModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,9 @@ import { RegisterModalComponent } from './components/dashboard/register-modal/re
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
+    MatSelectModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       preventDuplicates: true,

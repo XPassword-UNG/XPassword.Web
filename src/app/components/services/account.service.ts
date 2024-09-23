@@ -15,6 +15,10 @@ export class AccountService {
     this.apiUrl = enviroment.accountApiUrl;
   }
 
+  getUserData(): Observable<any> {
+    return this.http.get(this.apiUrl + '/GetData');
+  }
+
   postLogIn(request: LoginRequest): Observable<any> {
     return this.http.post(this.apiUrl + '/LogIn', request);
   }
